@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CVApp.MainPage"
+             xmlns:vm="clr-namespace:CVApp.ViewModels"
+             BackgroundColor="#f4f4f4">
+    <ContentPage.BindingContext>
+        <vm:CVViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <StackLayout Padding="20">
+            <!-- Cabecera -->
+            <StackLayout Orientation="Horizontal" BackgroundColor="#333" Padding="20">
+                <Frame WidthRequest="100" HeightRequest="100" CornerRadius="50" BackgroundColor="White" HasShadow="False">
+                    <Image Source="profile.jpg" Aspect="AspectFill" />
+                </Frame>
+                <StackLayout Padding="10" VerticalOptions="Center">
+                    <Label Text="{Binding CV.Nombre}" FontSize="24" TextColor="#ccc" />
+                    <Label Text="{Binding CV.Puesto}" FontSize="18" TextColor="#8f8f8f" />
+                </StackLayout>
+            </StackLayout>
+
+            <!-- Información editable -->
+            <StackLayout Margin="0,20">
+                <Label Text="Teléfono:" FontSize="18" TextColor="#333" />
+                <Entry Text="{Binding CV.Telefono}" FontSize="16" TextColor="#000" />
+
+                <Label Text="Correo:" FontSize="18" TextColor="#333" Margin="0,10,0,0" />
+                <Entry Text="{Binding CV.Correo}" FontSize="16" TextColor="#000" />
+
+                <Label Text="Idiomas:" FontSize="18" TextColor="#333" Margin="0,10,0,0" />
+                <ListView ItemsSource="{Binding CV.Idiomas}" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding .}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Entry Placeholder="Añadir idioma" Completed="OnAddIdioma" />
+
+                <Label Text="Aptitudes:" FontSize="18" TextColor="#333" Margin="0,10,0,0" />
+                <ListView ItemsSource="{Binding CV.Aptitudes}" HasUnevenRows="True">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding .}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Entry Placeholder="Añadir aptitud" Completed="OnAddAptitud" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
